@@ -54,7 +54,7 @@ function AppContent() {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [raceMode, setRaceMode] = useState(null);
+  const [raceMode, setRaceMode] = useState(null); // ✅ allow user to choose
   const [singleConfig, setSingleConfig] = useState(null);
   const audioRef = useRef(null);
 
@@ -69,9 +69,17 @@ function AppContent() {
   const closeLogin = () => setShowLoginModal(false);
   const closeAuth = () => setShowAuthModal(false);
 
-  const selectMode = (mode) => { setRaceMode(mode); setSingleConfig(null); };
+  const selectMode = (mode) => {
+    setRaceMode(mode);
+    setSingleConfig(null);
+  };
+
   const startSingle = (cfg) => setSingleConfig(cfg);
-  const resetMenu = () => { setRaceMode(null); setSingleConfig(null); };
+
+  const resetMenu = () => {
+    setRaceMode(null);
+    setSingleConfig(null);
+  };
 
   // Show ComingSoon after SingleRaceSetup
   if (raceMode === "single" && singleConfig) {
@@ -94,8 +102,13 @@ function AppContent() {
           {/* Login and Auth Modals */}
           {showLoginModal && (
             <LoginModal
-              onChooseGuest={() => { closeLogin(); }}
-              onChooseWallet={() => { closeLogin(); setShowAuthModal(true); }}
+              onChooseGuest={() => {
+                closeLogin();
+              }}
+              onChooseWallet={() => {
+                closeLogin();
+                setShowAuthModal(true);
+              }}
               onClose={closeLogin}
             />
           )}
@@ -106,6 +119,7 @@ function AppContent() {
             <>
               {userType === "wallet" && <ConnectWallet />}
 
+              {/* ✅ Mode selection menu */}
               {!raceMode && (
                 <RaceModeSelector
                   isGuest={userType === "guest"}
