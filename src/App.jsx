@@ -1,37 +1,45 @@
-import React from "react";
+// src/App.jsx
 
-const ComingSoon = ({ onBack }) => {
-  return (
-    <div
-      style={{
-        textAlign: "center",
-        padding: "4rem",
-        color: "#fff",
-        fontFamily: "'Orbitron', sans-serif",
-      }}
-    >
-      <h1>🚧 Coming Soon</h1>
-      <p>This feature is under development. Check back soon!</p>
+import React, { useState } from "react";
+import LandingPage from "./components/LandingPage";
+import ComingSoon from "./components/ComingSoon";
+import { UserProvider } from "./components/UserContext";
+import { UserAuthProvider } from "./components/UserAuthContext";
+import { UserXPProvider } from "./components/UserXPContext";
 
-      {onBack && (
-        <button
-          onClick={onBack}
-          style={{
-            marginTop: "2rem",
-            padding: "1rem 2rem",
-            background: "#1f8ef1",
-            border: "none",
-            borderRadius: "10px",
-            color: "#fff",
-            cursor: "pointer",
-            fontSize: "1rem",
-          }}
-        >
-          🔙 Back to Home
-        </button>
-      )}
-    </div>
-  );
+const containerStyle = {
+  fontFamily: "'Orbitron', sans-serif",
+  width: "100vw",
+  height: "100vh",
+  backgroundImage: "url('/images/pomerace-bg.jpg')",
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: "center",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  color: "#fff",
+  boxSizing: "border-box",
+  overflowY: "auto",
 };
 
-export default ComingSoon;
+export default function App() {
+  const [showComingSoon, setShowComingSoon] = useState(false);
+
+  return (
+    <UserAuthProvider>
+      <UserProvider>
+        <UserXPProvider>
+          <div style={containerStyle}>
+            {showComingSoon ? (
+              <ComingSoon />
+            ) : (
+              <LandingPage onPlayClick={() => setShowComingSoon(true)} />
+            )}
+          </div>
+        </UserXPProvider>
+      </UserProvider>
+    </UserAuthProvider>
+  );
+}
