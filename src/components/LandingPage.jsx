@@ -38,7 +38,7 @@ export default function LandingPage({ onPlayClick }) {
         </button>
         <a
           style={{ ...styles.button, background: "#1f8ef1" }}
-          href="https://app.uniswap.org"
+          href="https://app.uniswap.org/explore/tokens/ethereum/0xf9f779a95027d3f18504c49a6b2e93fec0afd6b2"
           target="_blank"
           rel="noopener noreferrer"
         >
