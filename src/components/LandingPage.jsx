@@ -60,7 +60,7 @@ export default function LandingPage({ onPlayClick }) {
         <h2>🛠 Tokenomics</h2>
         <ul>
           <li>Total Supply: 1,000,000,000 $POMX</li>
-          <li>40% Liquidity / 40% In-Game / 20% Founder Wallet</li>
+          <li>80% Liquidity (available for gameplay & market) / 20% Founder Wallet</li>
           <li>No taxes, no burns — pure racing fuel</li>
         </ul>
       </div>
@@ -74,6 +74,7 @@ export default function LandingPage({ onPlayClick }) {
           <li>Choose race mode: training, single, or tournament</li>
           <li>🏁 Hit the track and earn XP, skins, and $POMX</li>
         </ol>
+        <p><em>🚧 Coming soon – gameplay features are under development!</em></p>
       </div>
 
       {/* 📈 Roadmap */}
