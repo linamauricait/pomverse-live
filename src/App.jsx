@@ -1,11 +1,13 @@
 // src/App.jsx
 
-import React, { useState } from "react";
-import LandingPage from "./components/LandingPage";
-import ComingSoon from "./components/ComingSoon";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
 import { UserProvider } from "./components/UserContext";
 import { UserAuthProvider } from "./components/UserAuthContext";
 import { UserXPProvider } from "./components/UserXPContext";
+import LandingPage from "./components/LandingPage";
+import ComingSoon from "./components/ComingSoon";
+import AppContent from "./components/AppContent"; // make sure this is the full game logic
 
 const containerStyle = {
   fontFamily: "'Orbitron', sans-serif",
@@ -24,22 +26,35 @@ const containerStyle = {
   overflowY: "auto",
 };
 
-export default function App() {
-  const [showComingSoon, setShowComingSoon] = useState(false);
+function Routing() {
+  const navigate = useNavigate();
 
   return (
-    <UserAuthProvider>
-      <UserProvider>
-        <UserXPProvider>
+    <Routes>
+      <Route
+        path="/"
+        element={
           <div style={containerStyle}>
-            {showComingSoon ? (
-              <ComingSoon />
-            ) : (
-              <LandingPage onPlayClick={() => setShowComingSoon(true)} />
-            )}
+            <LandingPage onPlayClick={() => navigate("/coming-soon")} />
           </div>
-        </UserXPProvider>
-      </UserProvider>
-    </UserAuthProvider>
+        }
+      />
+      <Route path="/coming-soon" element={<ComingSoon />} />
+      <Route path="/app" element={<AppContent />} />
+    </Routes>
+  );
+}
+
+export default function App() {
+  return (
+    <Router>
+      <UserAuthProvider>
+        <UserProvider>
+          <UserXPProvider>
+            <Routing />
+          </UserXPProvider>
+        </UserProvider>
+      </UserAuthProvider>
+    </Router>
   );
 }

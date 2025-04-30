@@ -1,32 +1,30 @@
-// src/components/ComingSoon.jsx
-
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function ComingSoon() {
+const ComingSoon = () => {
+  const navigate = useNavigate();
+
   return (
-    <div style={styles.container}>
-      <div style={styles.text}>🏁 Coming Soon 🏁</div>
+    <div style={{ textAlign: "center", padding: "4rem", color: "#fff" }}>
+      <h1>🚧 Coming Soon</h1>
+      <p>This feature is under development. Check back soon!</p>
+      <button
+        onClick={() => navigate("/")}
+        style={{
+          marginTop: "2rem",
+          padding: "1rem 2rem",
+          background: "#1f8ef1",
+          border: "none",
+          borderRadius: "10px",
+          color: "#fff",
+          cursor: "pointer",
+          fontSize: "1rem",
+        }}
+      >
+        🔙 Back to Home
+      </button>
     </div>
   );
-}
-
-const styles = {
-  container: {
-    position: "fixed",
-    top: 0,
-    left: 0,
-    width: "100vw",
-    height: "100vh",
-    backgroundColor: "#000",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    zIndex: 9999,
-  },
-  text: {
-    color: "#fff",
-    fontSize: "3rem",
-    fontFamily: "'Orbitron', sans-serif",
-    textAlign: "center",
-  },
 };
+
+export default ComingSoon;
